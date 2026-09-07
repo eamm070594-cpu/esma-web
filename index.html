@@ -1,0 +1,1361 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESMA Industrial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,opsz,wght@1,9..144,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --blue:#2C4A66; --blue-strong:#1E3548; --blue-light:#7E97AC; --ink:#171717; --muted:#737373;
+    --paper:#FFFFFF; --surface:#F5F5F4; --surface-2:#ECEBE9; --muted-bg:#E9EDF1; --dark:#0D141C; --line:#E3E1DD;
+    --steel:#8B9099; --steel-dark:#4B5259;
+    --on-blue:#F5F7F9; --shadow:0 1px 2px rgba(13,20,28,.05), 0 18px 40px -22px rgba(13,20,28,.30);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --blue:#82ACDD; --blue-strong:#A3C6EE; --blue-light:#5B7A96; --ink:#EEF2F5; --muted:#A9B7C2;
+      --paper:#0B111A; --surface:#131B26; --surface-2:#1A2430; --muted-bg:#101823; --dark:#05090F; --line:#243040; --on-blue:#0B111A;
+      --steel:#5A6169; --steel-dark:#2B3036;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 24px 48px -24px rgba(0,0,0,.7);
+    }
+  }
+  :root[data-theme="dark"]{
+    --blue:#82ACDD; --blue-strong:#A3C6EE; --blue-light:#5B7A96; --ink:#EEF2F5; --muted:#A9B7C2;
+    --paper:#0B111A; --surface:#131B26; --surface-2:#1A2430; --muted-bg:#101823; --dark:#05090F; --line:#243040; --on-blue:#0B111A;
+    --steel:#5A6169; --steel-dark:#2B3036;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 24px 48px -24px rgba(0,0,0,.7);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto;} *{animation-duration:.001ms !important; transition-duration:.001ms !important;} }
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Hanken Grotesk', system-ui, -apple-system, Segoe UI, sans-serif;font-size:16.5px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+  img{max-width:100%;display:block;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3,h4{font-family:'Hanken Grotesk',sans-serif;font-weight:500;text-wrap:balance;line-height:1.08;margin:0;color:var(--ink);letter-spacing:-.02em;}
+  p{margin:0;}
+  ul,ol{margin:0;padding:0;list-style:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px;}
+  section{padding:108px 0;}
+  .eyebrow{font-size:1.05rem;line-height:1.2;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin:0 0 18px;}
+  .section-head{max-width:620px;margin:0 0 52px;}
+  .section-head.center{margin-left:auto;margin-right:auto;text-align:center;}
+  .section-head h2{font-size:clamp(1.9rem,3vw + 1rem,2.8rem);margin-bottom:14px;font-weight:500;}
+  .section-head p{color:var(--muted);font-size:1.05rem;max-width:52ch;}
+  .section-head.center p{margin:0 auto;}
+  .note{font-size:.85rem;color:var(--muted);margin-top:8px;font-style:italic;}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:.95rem;padding:14px 26px;border-radius:8px;border:1.5px solid transparent;cursor:pointer;transition:transform .15s ease, background .15s ease, border-color .15s ease, color .15s ease;white-space:nowrap;}
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--blue-light);color:#fff;}
+  .btn-primary:hover{background:var(--blue);}
+  .btn-ghost{background:transparent;color:var(--ink);border-color:var(--line);}
+  .btn-ghost:hover{border-color:var(--blue);color:var(--blue);}
+  .btn-sm{padding:9px 18px;font-size:.82rem;}
+  .link-arrow{display:inline-flex;align-items:center;gap:6px;font-weight:600;color:var(--ink);transition:gap .15s ease, color .15s ease;}
+  .link-arrow:hover{gap:10px;color:var(--blue);}
+
+  /* ---------- LOGO ---------- */
+  .brand{display:flex;align-items:center;gap:10px;}
+  .brand-logo{height:68px;width:auto;display:block;}
+  .footer .brand-logo{height:78px;}
+
+  /* ---------- NAV ---------- */
+  .nav{position:sticky;top:0;z-index:60;background:color-mix(in srgb, var(--paper) 92%, transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  .nav-inner{max-width:1240px;margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+  .nav-links{display:flex;align-items:center;gap:30px;flex:1;justify-content:center;}
+  .nav-links a{font-size:.92rem;font-weight:500;color:var(--ink);transition:color .15s ease;}
+  .nav-links a:hover{color:var(--blue);}
+  .nav-right{display:flex;align-items:center;gap:12px;}
+  .nav-toggle{display:none;align-items:center;gap:10px;background:none;border:1px solid var(--line);border-radius:8px;padding:9px 9px 9px 18px;cursor:pointer;font-family:inherit;font-size:.85rem;font-weight:600;color:var(--ink);}
+  .nav-toggle .bars{display:flex;flex-direction:column;gap:4px;width:20px;}
+  .nav-toggle .bars span{height:2px;background:var(--ink);border-radius:1px;transition:transform .2s ease, opacity .2s ease;}
+  .nav-toggle.open .bars span:nth-child(1){transform:translateY(6px) rotate(45deg);}
+  .nav-toggle.open .bars span:nth-child(2){opacity:0;}
+  .nav-toggle.open .bars span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
+
+  .nav-overlay{position:fixed;inset:0;background:var(--paper);z-index:55;display:flex;flex-direction:column;justify-content:center;padding:24px;opacity:0;pointer-events:none;transform:translateY(-8px);transition:opacity .22s ease, transform .22s ease;overflow-y:auto;}
+  .nav-overlay.open{opacity:1;pointer-events:auto;transform:translateY(0);}
+  .nav-overlay-links{max-width:1180px;margin:0 auto;width:100%;display:flex;flex-direction:column;gap:2px;}
+  .nav-overlay-links a{font-size:clamp(1.7rem,6vw,3rem);font-weight:400;padding:9px 0;border-bottom:1px solid var(--line);transition:color .15s ease, padding-left .15s ease;}
+  .nav-overlay-links a:hover{color:var(--blue);padding-left:10px;}
+  .nav-overlay-foot{max-width:1180px;margin:36px auto 0;width:100%;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--muted);font-size:.85rem;}
+  .nav-overlay-foot a{font-weight:600;color:var(--ink);}
+
+  /* ---------- HERO ---------- */
+  .hero{padding:52px 0 0;}
+  .hero-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:56px;align-items:center;}
+
+  /* ---------- LINE PAGES (Muebles / Letreros / Corte láser) ---------- */
+  .line-hero{padding:52px 0 88px;}
+  .line-hero-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:56px;align-items:center;}
+  .line-hero-media .rotator{border-radius:24px;aspect-ratio:6/5;border:1px solid var(--line);}
+  .line-h1{font-size:clamp(2.1rem,3.6vw + 1rem,3rem);color:var(--blue);max-width:14ch;margin-bottom:20px;font-weight:400;}
+  .line-hero-content .lede{max-width:52ch;color:var(--muted);font-size:1.05rem;margin-bottom:30px;}
+  .hero-copy .eyebrow{margin-bottom:16px;}
+  .hero-copy h1{font-size:clamp(2.1rem,3.4vw + 1rem,3.15rem);max-width:15ch;margin-bottom:22px;font-weight:400;letter-spacing:-.03em;}
+  .hero-copy h1 strong{font-weight:600;}
+  .hero-copy .lede{max-width:44ch;color:var(--muted);font-size:1.05rem;margin-bottom:32px;}
+  .hero-actions{display:flex;gap:22px;flex-wrap:wrap;align-items:center;}
+  .hero-media-col{position:relative;}
+  .hero-stat{position:absolute;top:-22px;right:24px;z-index:3;background:var(--paper);border-radius:16px;padding:16px 20px;box-shadow:var(--shadow);border:1px solid var(--line);}
+  .hero-stat .big{display:block;font-size:1.7rem;font-weight:600;color:var(--ink);line-height:1;}
+  .hero-stat .cap{display:block;margin-top:6px;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);max-width:16ch;}
+
+  /* ---------- ROTATOR (fotos que se mueven) ---------- */
+  .rotator{position:relative;overflow:hidden;background:var(--surface-2);}
+  .rotator-slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity 1.1s ease;}
+  .rotator-slide.active{opacity:1;}
+  .rotator-slide svg{width:15%;max-width:64px;min-width:26px;color:rgba(255,255,255,.85);}
+  .rotator-slide img{width:100%;height:100%;object-fit:contain;}
+  .rotator .badge{position:absolute;top:14px;left:14px;z-index:2;background:rgba(13,20,28,.55);color:#fff;font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;padding:5px 11px;border-radius:6px;}
+  .rotator-dots{position:absolute;bottom:12px;left:14px;z-index:2;display:flex;gap:5px;}
+  .rotator-dots span{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.5);transition:background .2s ease, transform .2s ease;}
+  .rotator-dots span.active{background:#fff;transform:scale(1.3);}
+
+  .hero-media-col .rotator{border-radius:26px;aspect-ratio:6/5;border:1px solid var(--line);}
+  .hero-media-col .rotator-slide svg{width:56px;height:56px;}
+
+  .h1-a{background:linear-gradient(150deg,#24425F,#4A6C8C);} .h1-b{background:linear-gradient(150deg,#1E3A55,#5A7FA0);} .h1-c{background:linear-gradient(150deg,#2C4A66,#6E8FAE);}
+
+  /* ---------- TRUST (logo strip) ---------- */
+  .trust{padding:44px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface);}
+  .trust-inner{display:flex;align-items:center;gap:40px;flex-wrap:wrap;}
+  .trust .eyebrow{margin:0;white-space:nowrap;}
+  .trust-stat{display:flex;flex-direction:column;gap:2px;flex:none;padding-right:36px;border-right:1px solid var(--line);}
+  .trust-stat .num{font-size:1.3rem;font-weight:600;color:var(--blue);line-height:1;white-space:nowrap;}
+  .trust-stat .cap{font-size:.78rem;color:var(--muted);white-space:nowrap;}
+  .trust-row{display:flex;flex-wrap:wrap;gap:36px;align-items:center;flex:1;}
+  .trust-logo{font-size:1.05rem;font-weight:700;letter-spacing:.02em;color:var(--muted);opacity:.7;transition:opacity .15s ease;text-transform:uppercase;}
+  .trust-logo:hover{opacity:1;color:var(--blue);}
+  .trust .note{margin:14px 0 0;}
+
+  /* ---------- MARQUEE (logos de clientes, desplazamiento continuo) ---------- */
+  .marquee-wrap{display:flex;flex-direction:column;gap:26px;margin-top:32px;}
+  .marquee-row{overflow:hidden;-webkit-mask-image:linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);mask-image:linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);}
+  .marquee-track{display:flex;align-items:center;width:max-content;will-change:transform;}
+  .marquee-track img{height:38px;width:auto;flex:none;display:block;margin-right:56px;}
+  .marquee-left{animation:marqueeLeft 100s linear infinite;}
+  .marquee-right{animation:marqueeRight 100s linear infinite;}
+  @keyframes marqueeLeft{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  @keyframes marqueeRight{from{transform:translateX(-50%);}to{transform:translateX(0);}}
+  @media (prefers-reduced-motion: reduce){ .marquee-track{animation:none;} }
+
+  /* ---------- HOME TEASERS ---------- */
+  .teaser-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-bottom:32px;}
+  .teaser-card{display:block;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:28px 24px;transition:border-color .15s ease, transform .15s ease;}
+  .teaser-card:hover{border-color:var(--blue-light);transform:translateY(-2px);}
+  .teaser-link{display:inline-block;margin-top:14px;font-size:.85rem;font-weight:600;color:var(--blue);}
+  .teaser-icon{width:44px;height:44px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff;margin-bottom:18px;}
+  .teaser-icon svg{width:22px;height:22px;}
+  .teaser-icon-a{background:linear-gradient(150deg,#24425F,#4A6C8C);}
+  .teaser-icon-b{background:linear-gradient(150deg,#1E3F6B,#4C7BB5);}
+  .teaser-icon-c{background:linear-gradient(150deg,#2B4A6F,#6E8FAE);}
+  .teaser-card h3{font-size:1.1rem;font-weight:500;margin-bottom:8px;}
+  .teaser-card p{color:var(--muted);font-size:.92rem;}
+  .teaser-cta{display:flex;justify-content:center;}
+
+  /* ---------- MINI BOOK (colecciones, libro interactivo) ---------- */
+  .book{display:grid;grid-template-columns:.9fr 1fr;background:var(--paper);border:1px solid var(--line);border-radius:24px;box-shadow:0 30px 70px rgba(13,20,28,.14);overflow:hidden;}
+  .book-page-left{padding:48px 48px;display:flex;flex-direction:column;justify-content:flex-start;background:var(--surface);}
+  .book-title{font-size:clamp(1.4rem,2vw + 1rem,1.9rem);margin:0 0 12px;font-weight:500;}
+  .book-lede{color:var(--muted);font-size:.96rem;margin:0 0 28px;max-width:36ch;}
+  .book-cats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px;}
+  .book-cat-btn{font-size:.82rem;font-weight:600;padding:8px 16px;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;transition:all .15s ease;}
+  .book-cat-btn:hover{border-color:var(--blue-light);}
+  .book-cat-btn.active{background:var(--blue);border-color:var(--blue);color:#fff;}
+  .book-nav{display:flex;align-items:center;gap:16px;}
+  .book-arrow{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--paper);color:var(--ink);font-size:1rem;cursor:pointer;transition:all .15s ease;flex:none;}
+  .book-arrow:hover:not(:disabled){border-color:var(--blue);color:var(--blue);}
+  .book-arrow:disabled{opacity:.35;cursor:default;}
+  .book-counter{font-size:.82rem;font-weight:600;color:var(--muted);letter-spacing:.02em;}
+  .book-page-right{position:relative;aspect-ratio:4/5;background:var(--surface-2);overflow:hidden;}
+  .book-spine{position:absolute;left:0;top:0;bottom:0;width:16px;background:linear-gradient(90deg, rgba(13,20,28,.16), transparent);z-index:20;pointer-events:none;}
+  .book-backcover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:44px;background:var(--dark);z-index:0;}
+  .book-backcover h3{color:#fff;font-size:1.25rem;margin:0 0 10px;font-weight:500;}
+  .book-backcover p{color:rgba(245,247,249,.72);font-size:.9rem;margin:0 0 22px;max-width:26ch;}
+  .book-backcover .btn-primary{background:var(--blue-light);}
+  .book-backcover .btn-primary:hover{background:var(--blue);}
+  .book-restart{margin-top:14px;font-size:.82rem;font-weight:600;color:rgba(245,247,249,.8);background:none;border:none;cursor:pointer;padding:0;}
+  .book-restart:hover{color:#fff;}
+  /* La hoja ES la foto completa (sin recorte agresivo por dividir la tarjeta
+     en franjas) — el texto va superpuesto abajo con degradado. El cambio de
+     hoja es un cross-fade + deslizamiento simple (nada de 3D/perspective):
+     mucho más confiable entre navegadores que un volteo 3D real, y el efecto
+     de "pasar la hoja" lo hace la propia foto, no un elemento aparte. */
+  .leaf{position:absolute;inset:0;cursor:pointer;opacity:0;transform:translateX(3%);transition:opacity .5s ease, transform .5s ease;pointer-events:none;}
+  .leaf.active{opacity:1;transform:translateX(0);pointer-events:auto;z-index:2;}
+  .leaf img{width:100%;height:100%;object-fit:cover;display:block;}
+  .leaf::after{content:"";position:absolute;inset:0;background:linear-gradient(to top, rgba(13,20,28,.85) 0%, rgba(13,20,28,.25) 42%, rgba(13,20,28,0) 62%);}
+  .leaf-overlay{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:26px 28px;}
+  .leaf-overlay h3{color:#fff;font-size:1.2rem;font-weight:500;margin:0 0 8px;}
+  .leaf-overlay p{color:rgba(255,255,255,.85);font-size:.9rem;margin:0;max-width:34ch;}
+  .leaf-overlay .teaser-link{color:#fff;margin-top:14px;display:inline-block;font-weight:600;font-size:.88rem;}
+  .leaf-overlay .teaser-link:hover{color:rgba(255,255,255,.75);}
+  @media(max-width:860px){
+    .book{grid-template-columns:1fr;border-radius:20px;}
+    .book-page-left{padding:36px 26px;order:2;}
+    .book-page-right{order:1;}
+  }
+
+  /* ---------- COLECCIONES ---------- */
+  .coll-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .coll-card{background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden;}
+  .coll-card .rotator{aspect-ratio:1/1;}
+  .coll-body{padding:20px 22px 22px;}
+  .coll-body h3{font-size:1.15rem;font-weight:500;margin-bottom:14px;}
+  .coll-actions{display:flex;gap:10px;flex-wrap:wrap;}
+
+  .c1-a{background:linear-gradient(150deg,#24425F,#4A6C8C);} .c1-b{background:linear-gradient(150deg,#1E3A55,#5A7FA0);} .c1-c{background:linear-gradient(150deg,#2C4A66,#6E8FAE);}
+  .c2-a{background:linear-gradient(150deg,#1B3A52,#3D6E8F);} .c2-b{background:linear-gradient(150deg,#173047,#4C86A8);} .c2-c{background:linear-gradient(150deg,#1E3A52,#5C97B8);}
+  .c3-a{background:linear-gradient(150deg,#2F4858,#5C7E90);} .c3-b{background:linear-gradient(150deg,#263C4A,#6B8CA0);} .c3-c{background:linear-gradient(150deg,#324F60,#7C9BAC);}
+  .c4-a{background:linear-gradient(150deg,#1E3F6B,#4C7BB5);} .c4-b{background:linear-gradient(150deg,#183258,#5C8AC0);} .c4-c{background:linear-gradient(150deg,#234677,#6E9BCB);}
+  .c5-a{background:linear-gradient(150deg,#2B4A6F,#6E8FAE);} .c5-b{background:linear-gradient(150deg,#233C58,#7C9BB8);} .c5-c{background:linear-gradient(150deg,#324F6E,#8CABC4);}
+
+  /* ---------- PROYECTOS ---------- */
+  .proj-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .proj-card{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--surface);}
+  .proj-card .rotator{aspect-ratio:4/3;}
+  .proj-body{padding:22px;}
+  .proj-tag{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);}
+  .proj-body h3{font-size:1.2rem;font-weight:500;margin:10px 0 8px;}
+  .proj-body p{color:var(--muted);font-size:.92rem;margin-bottom:16px;}
+  .p1-a{background:linear-gradient(150deg,#24425F,#4A6C8C);} .p1-b{background:linear-gradient(150deg,#1E3A55,#5A7FA0);}
+  .p2-a{background:linear-gradient(150deg,#1E3F6B,#4C7BB5);} .p2-b{background:linear-gradient(150deg,#183258,#5C8AC0);}
+  .p3-a{background:linear-gradient(150deg,#2F4858,#5C7E90);} .p3-b{background:linear-gradient(150deg,#263C4A,#6B8CA0);}
+
+  /* ---------- CATALOG INFO ---------- */
+  .catalog-info{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface);margin-bottom:28px;}
+  .catalog-fact{padding:20px 22px;border-right:1px solid var(--line);display:flex;flex-direction:column;gap:6px;}
+  .catalog-fact:last-child{border-right:none;}
+  .catalog-fact-label{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);}
+  .catalog-fact-value{font-size:.92rem;font-weight:500;}
+  .catalog-fact-cta{background:var(--blue-light);color:#fff;transition:background .15s ease;}
+  .catalog-fact-cta:hover{background:var(--blue);}
+  .catalog-fact-cta .catalog-fact-label{color:rgba(255,255,255,.75);}
+  .catalog-jump{display:flex;gap:10px;margin-bottom:40px;flex-wrap:wrap;}
+  .catalog-jump a{font-size:.85rem;font-weight:600;padding:9px 18px;border-radius:8px;border:1px solid var(--line);color:var(--ink);transition:all .15s ease;}
+  .catalog-jump a:hover{border-color:var(--blue);color:var(--blue);}
+
+  /* ---------- GALLERY ---------- */
+  .gallery-group{padding-top:44px;border-top:1px solid var(--line);margin-top:44px;}
+  .gallery-group:first-child{padding-top:0;border-top:none;margin-top:0;}
+  .gallery-group-title{font-size:1.3rem;font-weight:400;margin-bottom:24px;display:flex;align-items:baseline;gap:10px;}
+  .gallery-group-count{font-size:.78rem;font-weight:600;color:var(--muted);letter-spacing:.04em;}
+  .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .tile{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;}
+  .tile .rotator{aspect-ratio:4/3;}
+  .tile figcaption{display:flex;justify-content:space-between;padding:14px 16px;font-size:.82rem;color:var(--muted);border-top:1px solid var(--line);}
+  .tile figcaption b{color:var(--ink);font-weight:500;}
+  .tile-i1-a{background:linear-gradient(150deg,#24425F,#4A6C8C);} .tile-i1-b{background:linear-gradient(150deg,#1E3A55,#5A7FA0);}
+  .tile-i2-a{background:linear-gradient(150deg,#1B3A52,#3D6E8F);} .tile-i2-b{background:linear-gradient(150deg,#173047,#4C86A8);}
+  .tile-i3-a{background:linear-gradient(150deg,#2F4858,#5C7E90);} .tile-i3-b{background:linear-gradient(150deg,#263C4A,#6B8CA0);}
+  .tile-s1-a{background:linear-gradient(150deg,#1E3F6B,#4C7BB5);} .tile-s1-b{background:linear-gradient(150deg,#183258,#5C8AC0);}
+  .tile-s2-a{background:linear-gradient(150deg,#2B4A6F,#6E8FAE);} .tile-s2-b{background:linear-gradient(150deg,#233C58,#7C9BB8);}
+  .tile-s3-a{background:linear-gradient(150deg,#173047,#4C86A8);} .tile-s3-b{background:linear-gradient(150deg,#1E3A55,#5A7FA0);}
+
+  /* ---------- PROCESS ---------- */
+  .process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
+  .process-steps li{padding-top:22px;border-top:2px solid var(--line);}
+  .step-num{font-size:1rem;font-weight:600;color:var(--blue);display:block;margin-bottom:16px;}
+  .process-steps h3{font-size:1.2rem;margin-bottom:8px;font-weight:500;}
+  .process-steps p{color:var(--muted);font-size:.92rem;max-width:32ch;}
+
+  .process-steps-full{display:grid;grid-template-columns:repeat(4,1fr);gap:28px;}
+  .process-steps-full li{padding-top:22px;border-top:2px solid var(--line);}
+  .process-steps-full h3{font-size:1.2rem;margin:0 0 8px;font-weight:500;}
+  .process-steps-full p{color:var(--muted);font-size:.92rem;margin-bottom:16px;}
+  .proceso-img-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .proceso-step{position:relative;aspect-ratio:3/4;border-radius:16px;overflow:hidden;border:1px solid var(--line);}
+  .proceso-step img{width:100%;height:100%;object-fit:cover;display:block;}
+  .proceso-step::after{content:"";position:absolute;inset:0;background:linear-gradient(to top, rgba(13,20,28,.82) 0%, rgba(13,20,28,.15) 45%, rgba(13,20,28,0) 65%);}
+  .proceso-step .step-info{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:18px 20px;}
+  .proceso-step .step-num{display:block;color:rgba(255,255,255,.65);font-size:.82rem;font-weight:700;margin-bottom:4px;}
+  .proceso-step h3{color:#fff;font-size:1.05rem;font-weight:500;margin:0;}
+  .pillars-img{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .pillar-tile{position:relative;margin:0;aspect-ratio:3/2;border-radius:14px;overflow:hidden;border:1px solid var(--line);}
+  .pillar-tile img{width:100%;height:100%;object-fit:cover;display:block;}
+  .pillar-tile::after{content:"";position:absolute;inset:0;background:linear-gradient(to top, rgba(13,20,28,.68) 0%, rgba(13,20,28,.05) 50%, rgba(13,20,28,0) 68%);pointer-events:none;}
+  .pillar-tile figcaption{position:absolute;left:18px;right:18px;bottom:14px;z-index:1;color:#fff;font-family:'Fraunces',serif;font-style:italic;font-weight:500;font-size:1.2rem;letter-spacing:.01em;}
+  .step-tags{display:flex;flex-direction:column;gap:6px;}
+  .step-tags span{font-size:.72rem;font-weight:600;letter-spacing:.03em;color:var(--blue);background:var(--surface-2);border-radius:6px;padding:5px 10px;width:fit-content;}
+
+  .deliver-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  .deliver-grid li{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden;}
+  .deliver-grid .deliver-img{width:100%;aspect-ratio:6/5;object-fit:cover;display:block;}
+  .deliver-grid .deliver-body{padding:20px 22px 22px;}
+  .deliver-grid h4{font-family:'Hanken Grotesk',sans-serif;font-size:1.02rem;font-weight:500;margin-bottom:8px;letter-spacing:-.01em;}
+  .deliver-grid p{color:var(--muted);font-size:.88rem;}
+
+  .faq-list{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:1px;}
+  .faq-list details{background:var(--surface);border:1px solid var(--line);padding:18px 22px;}
+  .faq-list details:first-child{border-radius:12px 12px 0 0;}
+  .faq-list details:last-child{border-radius:0 0 12px 12px;}
+  .faq-list summary{cursor:pointer;font-weight:500;list-style:none;display:flex;justify-content:space-between;align-items:center;}
+  .faq-list summary::-webkit-details-marker{display:none;}
+  .faq-list summary::after{content:"+";font-size:1.2rem;color:var(--muted);flex:none;margin-left:12px;}
+  .faq-list details[open] summary::after{content:"–";}
+  .faq-list details p{color:var(--muted);font-size:.92rem;margin-top:12px;}
+
+  /* ---------- ABOUT / PILLARS ---------- */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+  .pillars{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--surface);}
+  .pillars li{padding:30px 26px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);}
+  .pillars li:nth-child(2n){border-right:none;}
+  .pillars li:nth-child(3),.pillars li:nth-child(4){border-bottom:none;}
+  .pillars .word{display:block;font-size:1.6rem;color:var(--blue);margin-bottom:8px;}
+  .pillars .cap{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);}
+
+  /* ---------- PROYECTO DESTACADO (cerca del final, antes de contacto) ---------- */
+  .featured-project{padding:100px 0;background:var(--dark);}
+  .featured-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;}
+  .featured-media img{width:100%;border-radius:20px;display:block;aspect-ratio:6/5;object-fit:cover;}
+  .featured-copy .eyebrow{color:var(--blue-light);}
+  .featured-copy h2{color:#fff;margin-bottom:14px;}
+  .featured-copy p{color:rgba(245,247,249,.72);max-width:46ch;margin-bottom:26px;}
+  @media(max-width:860px){
+    .featured-grid{grid-template-columns:1fr;gap:28px;}
+    .featured-media{order:-1;}
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact{background:var(--surface);}
+  .contact-inner{display:grid;grid-template-columns:.95fr 1.05fr;gap:60px;}
+  .contact-info h2{font-size:clamp(1.9rem,3vw + 1rem,2.6rem);margin:0 0 16px;font-weight:400;}
+  .contact-info .lede2{color:var(--muted);margin-bottom:30px;max-width:44ch;}
+  .contact-links{display:flex;flex-direction:column;border-top:1px solid var(--line);}
+  .contact-links a{display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid var(--line);font-weight:600;transition:color .15s ease;}
+  .contact-links a:hover{color:var(--blue);}
+  .contact-links a span.tiny{font-weight:400;color:var(--muted);font-size:.85rem;}
+
+  .contact-form{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:30px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:16px;}
+  .contact-form label{display:flex;flex-direction:column;gap:7px;font-size:.78rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);}
+  .contact-form input,.contact-form select,.contact-form textarea{font-family:inherit;font-size:1rem;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;outline:none;transition:border-color .15s ease;resize:vertical;}
+  .contact-form input:focus,.contact-form select:focus,.contact-form textarea:focus{border-color:var(--blue);}
+  .contact-form button{align-self:flex-start;margin-top:4px;}
+
+  /* ---------- WHATSAPP FAB (pill) ---------- */
+  .wa-fab{position:fixed;bottom:22px;right:22px;display:flex;align-items:center;gap:10px;background:var(--blue);color:var(--on-blue);padding:14px 22px 14px 16px;border-radius:100px;box-shadow:var(--shadow);z-index:70;transition:transform .15s ease;font-weight:600;font-size:.92rem;}
+  .wa-fab:hover{transform:translateY(-2px);}
+  .wa-fab svg{width:20px;height:20px;flex:none;}
+
+  /* ---------- FOOTER ---------- */
+  .site-footer{background:var(--steel);color:var(--dark);padding:72px 0 32px;}
+  .footer-top{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:40px;margin-bottom:56px;}
+  .footer-top .tag{margin-top:14px;color:color-mix(in srgb, var(--dark) 70%, transparent);max-width:32ch;font-size:.92rem;}
+  .footer-col h5{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;color:color-mix(in srgb, var(--dark) 75%, transparent);}
+  .footer-col ul{display:flex;flex-direction:column;gap:10px;}
+  .footer-col a{font-size:.95rem;transition:opacity .15s ease;}
+  .footer-col a:hover{opacity:.6;}
+  .footer-social{display:flex;gap:10px;margin-top:18px;}
+  .footer-social a{width:38px;height:38px;border:1px solid color-mix(in srgb, var(--dark) 35%, transparent);border-radius:50%;display:flex;align-items:center;justify-content:center;}
+  .footer-social svg{width:16px;height:16px;}
+  .footer-bottom{border-top:1px solid color-mix(in srgb, var(--dark) 20%, transparent);padding-top:24px;text-align:center;font-size:.82rem;color:color-mix(in srgb, var(--dark) 70%, transparent);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:980px){
+    .nav-links{display:none;}
+    .nav-toggle{display:flex;}
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-media-col{order:-1;}
+    .line-hero-grid{grid-template-columns:1fr;}
+    .line-hero-media{order:-1;}
+    .hero-stat{top:14px;right:14px;}
+    .about-grid{grid-template-columns:1fr;}
+    .contact-inner{grid-template-columns:1fr;}
+    .process-steps{grid-template-columns:1fr 1fr;}
+    .process-steps-full{grid-template-columns:1fr 1fr;}
+    .proceso-img-grid{grid-template-columns:1fr 1fr;}
+    .deliver-grid{grid-template-columns:1fr 1fr;}
+    .gallery-grid{grid-template-columns:1fr 1fr;}
+    .coll-grid{grid-template-columns:1fr 1fr;}
+    .proj-grid{grid-template-columns:1fr 1fr;}
+    .footer-top{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width:560px){
+    section{padding:64px 0;}
+    .process-steps{grid-template-columns:1fr;}
+    .process-steps-full{grid-template-columns:1fr;}
+    .proceso-img-grid{grid-template-columns:1fr;}
+    .pillars-img{grid-template-columns:1fr;}
+    .deliver-grid{grid-template-columns:1fr;}
+    .pillars{grid-template-columns:1fr;}
+    .pillars li{border-right:none !important;border-bottom:1px solid var(--line) !important;}
+    .pillars li:last-child{border-bottom:none !important;}
+    .gallery-grid{grid-template-columns:1fr 1fr;}
+    .catalog-info{grid-template-columns:1fr 1fr;}
+    .catalog-fact:nth-child(2){border-right:none;}
+    .catalog-fact:nth-child(1),.catalog-fact:nth-child(2){border-bottom:1px solid var(--line);}
+    .coll-grid{grid-template-columns:1fr;}
+    .teaser-grid{grid-template-columns:1fr;}
+    .proj-grid{grid-template-columns:1fr;}
+    .footer-top{grid-template-columns:1fr;gap:32px;}
+    .nav-overlay-foot{flex-direction:column;}
+    .trust-inner{flex-direction:column;align-items:flex-start;gap:20px;}
+    .trust-stat{border-right:none;padding-right:0;}
+    .wa-fab span{display:none;}
+    .wa-fab{padding:14px;}
+  }
+
+  /* ---------- SPLASH (pantalla de entrada con el logo) ---------- */
+  .splash{position:fixed;inset:0;z-index:999;background:var(--dark);display:flex;align-items:center;justify-content:center;transition:opacity .5s ease, visibility .5s ease;}
+  .splash img{height:220px;max-width:80vw;width:auto;animation:splashIn .6s cubic-bezier(.2,.9,.3,1.3) both, splashPulse 1.6s ease-in-out .6s infinite;}
+  .splash.hide{opacity:0;visibility:hidden;pointer-events:none;}
+  @keyframes splashIn{0%{opacity:0;transform:scale(.75);}100%{opacity:1;transform:scale(1);}}
+  @keyframes splashPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.92;transform:scale(1.03);}}
+  @media (prefers-reduced-motion: reduce){ .splash img{animation:none;} }
+  @media(max-width:600px){ .splash img{height:140px;} }
+</style>
+</head>
+<body>
+
+<div class="splash" id="splash"><img src="fotos/logo-esma-metal.png" alt="ESMA Industrial"></div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#" data-page="home">
+      <img class="brand-logo" src="fotos/logo-esma-metal.png" alt="ESMA Industrial">
+    </a>
+    <nav class="nav-links">
+      <a href="#" data-page="muebles">Muebles</a>
+      <a href="#" data-page="letreros">Letreros</a>
+      <a href="#" data-page="laser">Corte láser</a>
+      <a href="#" data-page="proyectos">Proyectos</a>
+      <a href="#" data-anchor="proceso">Proceso</a>
+      <a href="#" data-anchor="nosotros">Nosotros</a>
+    </nav>
+    <div class="nav-right">
+      <a href="https://claude.ai/code/artifact/6becf799-34cd-499e-8763-1fad9846c4f5" target="_blank" class="btn btn-ghost btn-sm">Catálogo</a>
+      <a href="#" data-anchor="contacto" class="btn btn-primary btn-sm">Cotizar</a>
+      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navOverlay">
+        <span class="bars"><span></span><span></span><span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="nav-overlay" id="navOverlay">
+  <nav class="nav-overlay-links">
+    <a href="#" data-nav data-page="muebles">Muebles</a>
+    <a href="#" data-nav data-page="letreros">Letreros</a>
+    <a href="#" data-nav data-page="laser">Corte láser</a>
+    <a href="#" data-nav data-page="proyectos">Proyectos</a>
+    <a href="#" data-nav data-anchor="proceso">Proceso</a>
+    <a href="#" data-nav data-anchor="nosotros">Nosotros</a>
+    <a href="#" data-nav data-anchor="contacto">Contacto</a>
+    <a href="https://claude.ai/code/artifact/6becf799-34cd-499e-8763-1fad9846c4f5" target="_blank">Catálogo (PDF)</a>
+  </nav>
+  <div class="nav-overlay-foot">
+    <span>@esma_industrial</span>
+    <a href="mailto:contacto@esmaindustrial.mx">contacto@esmaindustrial.mx</a>
+  </div>
+</div>
+
+<main id="top">
+<div class="page" id="page-home">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Soluciones de fabricación a la medida</p>
+        <h1>La solución a la medida para <strong>cada proyecto.</strong></h1>
+        <p class="lede">Resolvemos tu proyecto con muebles, letreros y piezas de corte láser fabricados en nuestro taller — con tecnología, ingeniería y procesos de manufactura avanzada.</p>
+        <div class="hero-actions">
+          <a href="#contacto" class="btn btn-primary">Solicitar cotización →</a>
+          <a href="#" data-anchor="colecciones" class="link-arrow">Explorar trabajos →</a>
+        </div>
+      </div>
+      <div class="hero-media-col">
+        <div class="rotator">
+          <div class="rotator-slide active"><img src="fotos/power-cycle.jpg" alt="Letrero iluminado redondo"></div>
+          <div class="rotator-slide"><img src="fotos/shalom-estetic.jpg" alt="Letrero de fachada iluminado"></div>
+          <div class="rotator-slide"><img src="fotos/daniela-martinez.jpg" alt="Letrero de fachada"></div>
+          <div class="rotator-slide"><img src="fotos/radioscan-night.jpg" alt="Letrero circular iluminado de noche"></div>
+          <div class="rotator-slide"><img src="fotos/linea-italia.jpg" alt="Letrero corporativo interior"></div>
+          <div class="rotator-slide"><img src="fotos/tv-wall-unit.jpg" alt="Centro de entretenimiento a medida"></div>
+          <div class="rotator-slide"><img src="fotos/closet-system.jpg" alt="Clóset a medida"></div>
+          <div class="rotator-slide"><img src="fotos/wedding-box.jpg" alt="Caja de madera grabada con láser"></div>
+          <div class="rotator-slide"><img src="fotos/moai.jpg" alt="Letrero de madera y acrílico"></div>
+          <div class="rotator-slide"><img src="fotos/mm-boutique.jpg" alt="Letrero circular retroiluminado en boutique"></div>
+          <div class="rotator-dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust">
+    <div class="wrap trust-inner">
+      <div class="trust-stat">
+        <span class="num">Desde 2022</span>
+        <span class="cap">Fabricando a la medida</span>
+      </div>
+      <p class="eyebrow">Confiaron su proyecto en nosotros</p>
+    </div>
+    <div class="marquee-wrap">
+      <div class="marquee-row">
+        <div class="marquee-track marquee-left">
+          <img src="fotos/clientes-tira.png" alt="Logos de clientes de ESMA Industrial">
+          <img src="fotos/clientes-tira.png" alt="" aria-hidden="true">
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="colecciones">
+    <div class="wrap">
+      <div class="book" id="miniBook">
+        <div class="book-page-left">
+          <p class="eyebrow">Colecciones</p>
+          <h2 class="book-title">Un mismo taller, <strong>la solución a la medida</strong> para tu proyecto.</h2>
+          <p class="book-lede">Da clic en la hoja, usa las flechas o salta directo a lo que buscas.</p>
+          <div class="book-cats">
+            <button type="button" class="book-cat-btn active" data-cat="muebles">Muebles</button>
+            <button type="button" class="book-cat-btn" data-cat="letreros">Letreros</button>
+            <button type="button" class="book-cat-btn" data-cat="laser">Corte láser</button>
+          </div>
+          <div class="book-nav">
+            <button type="button" class="book-arrow" id="bookPrev" aria-label="Página anterior">←</button>
+            <span class="book-counter" id="bookCounter">Muebles · 1/9</span>
+            <button type="button" class="book-arrow" id="bookNext" aria-label="Página siguiente">→</button>
+          </div>
+        </div>
+        <div class="book-page-right">
+          <div class="book-backcover">
+            <h3>¿Listo para tu proyecto?</h3>
+            <p>Cuéntanos qué necesitas y te armamos una propuesta a la medida.</p>
+            <a href="#" data-anchor="contacto" class="btn btn-primary btn-sm">Cotizar ahora →</a>
+            <button type="button" class="book-restart" id="bookRestart">↺ Ver el catálogo de nuevo</button>
+          </div>
+          <div class="leaf" data-leaf="0" data-cat="muebles">
+            <img src="fotos/render-muebles-01.jpg" alt="Render de muebles ESMA 1">
+            <div class="leaf-overlay">
+              <h3>Muebles a medida</h3>
+              <p>Escritorio ejecutivo en madera y metal, a la medida.</p>
+              <a href="#" data-page="muebles" class="teaser-link">Ver muebles →</a>
+            </div>
+          </div>
+          <div class="leaf" data-leaf="1" data-cat="muebles">
+            <img src="fotos/render-muebles-02.jpg" alt="Render de muebles ESMA 2">
+            <div class="leaf-overlay">
+              <h3>Muebles a medida</h3>
+              <p>Estación de trabajo con acabados en madera y vista panorámica.</p>
+              <a href="#" data-page="muebles" class="teaser-link">Ver muebles →</a>
+            </div>
+          </div>
+          <div class="leaf" data-leaf="2" data-cat="muebles">
+            <img src="fotos/render-muebles-03.jpg" alt="Render de muebles ESMA 3">
+            <div class="leaf-overlay">
+              <h3>Muebles a medida</h3>
+              <p>Centro de entretenimiento con iluminación integrada.</p>
+              <a href="#" data-page="muebles" class="teaser-link">Ver muebles →</a>
+            </div>
+          </div>
+          <div class="leaf" data-leaf="3" data-cat="muebles">
+            <img src="fotos/render-muebles-04.jpg" alt="Render de muebles ESMA 4">
+            <div class="leaf-overlay">
+              <h3>Muebles a medida</h3>
+              <p>Mueble de TV con paneles decorativos en tonos cálidos.</p>
+              <a href="#" data-page="muebles" class="teaser-link">Ver muebles →</a>
+            </div>
+          </div>
+          <div class="leaf" data-leaf="4" data-cat="muebles">
+            <img src="fotos/render-muebles-05.jpg" alt="Render de muebles ESMA 5">
+            <div class="leaf-overlay">
+              <h3>Muebles a medida</h3>
+              <p>Centro de entretenimiento en madera oscura y luz indirecta.</p>
+              <a href="#" data-page="muebles" class="teaser-link">Ver muebles →</a>
+            </div>
+          </div>
+          <div class="leaf" data-leaf="5" data-cat="muebles">
+            <img src="fotos/render-muebles-06.jpg" alt="Render de muebles ESMA 6">
+            <div class="leaf-overlay">
+              <h3>Muebles a medida</h3>
+              <p>Recámara con clóset y cabecera tapizada a medida.</p>
+              <a href="#" data-page="muebles" class="teaser-link">Ver muebles →</a>
+            </div>
+          </div>
+          <div class="leaf" data-leaf="6" data-cat="muebles">
+            <img src="fotos/render-muebles-07.jpg" alt="Render de muebles ESMA 7">
+            <div class="leaf-overlay">
+              <h3>Muebles a medida</h3>
+              <p>Recámara con clóset a medida en tonos cálidos.</p>
+              <a href="#" data-page="muebles" class="teaser-link">Ver muebles →</a>
+            </div>
+          </div>
+          <div class="leaf" data-leaf="7" data-cat="muebles">
+            <img src="fotos/render-muebles-08.jpg" alt="Render de muebles ESMA 8">
+            <div class="leaf-overlay">
+              <h3>Muebles a medida</h3>
+              <p>Isla de cocina en madera y cuarzo, a la medida.</p>
+              <a href="#" data-page="muebles" class="teaser-link">Ver muebles →</a>
+            </div>
+          </div>
+          <div class="leaf" data-leaf="8" data-cat="muebles">
+            <img src="fotos/render-muebles-09.jpg" alt="Render de muebles ESMA 9">
+            <div class="leaf-overlay">
+              <h3>Muebles a medida</h3>
+              <p>Cocina integral con isla y acabados en madera.</p>
+              <a href="#" data-page="muebles" class="teaser-link">Ver muebles →</a>
+            </div>
+          </div>
+          <div class="leaf" data-leaf="9" data-cat="letreros">
+            <img src="fotos/render-letreros-01.jpg" alt="Render de letreros ESMA 10">
+            <div class="leaf-overlay">
+              <h3>Letreros</h3>
+              <p>Letrero retroiluminado en acero cepillado — Limey Repostería.</p>
+              <a href="#" data-page="letreros" class="teaser-link">Ver letreros →</a>
+            </div>
+          </div>
+          <div class="leaf" data-leaf="10" data-cat="letreros">
+            <img src="fotos/render-letreros-02.jpg" alt="Render de letreros ESMA 11">
+            <div class="leaf-overlay">
+              <h3>Letreros</h3>
+              <p>Letrero corporativo retroiluminado — ESMA Industrial.</p>
+              <a href="#" data-page="letreros" class="teaser-link">Ver letreros →</a>
+            </div>
+          </div>
+          <div class="leaf" data-leaf="11" data-cat="letreros">
+            <img src="fotos/render-letreros-03.jpg" alt="Render de letreros ESMA 12">
+            <div class="leaf-overlay">
+              <h3>Letreros</h3>
+              <p>Letrero de acrílico con luz indirecta — Bruma Café & Más.</p>
+              <a href="#" data-page="letreros" class="teaser-link">Ver letreros →</a>
+            </div>
+          </div>
+          <div class="leaf" data-leaf="12" data-cat="letreros">
+            <img src="fotos/render-letreros-04.jpg" alt="Render de letreros ESMA 13">
+            <div class="leaf-overlay">
+              <h3>Letreros</h3>
+              <p>Letrero tipo bandera en tela — Oliva Café de Especialidad.</p>
+              <a href="#" data-page="letreros" class="teaser-link">Ver letreros →</a>
+            </div>
+          </div>
+          <div class="leaf" data-leaf="13" data-cat="letreros">
+            <img src="fotos/render-letreros-05.jpg" alt="Render de letreros ESMA 14">
+            <div class="leaf-overlay">
+              <h3>Letreros</h3>
+              <p>Letrero colgante circular — Dulce Rincón.</p>
+              <a href="#" data-page="letreros" class="teaser-link">Ver letreros →</a>
+            </div>
+          </div>
+          <div class="leaf" data-leaf="14" data-cat="laser">
+            <img src="fotos/render-laser-01.jpg" alt="Render de laser ESMA 15">
+            <div class="leaf-overlay">
+              <h3>Corte láser</h3>
+              <p>Figuras y piezas decorativas en MDF y acrílico.</p>
+              <a href="#" data-page="laser" class="teaser-link">Ver corte láser →</a>
+            </div>
+          </div>
+          <div class="leaf" data-leaf="15" data-cat="laser">
+            <img src="fotos/render-laser-02.jpg" alt="Render de laser ESMA 16">
+            <div class="leaf-overlay">
+              <h3>Corte láser</h3>
+              <p>Accesorios y piezas personalizadas para el hogar.</p>
+              <a href="#" data-page="laser" class="teaser-link">Ver corte láser →</a>
+            </div>
+          </div>
+          <div class="leaf" data-leaf="16" data-cat="laser">
+            <img src="fotos/render-laser-03.jpg" alt="Render de laser ESMA 17">
+            <div class="leaf-overlay">
+              <h3>Corte láser</h3>
+              <p>Catálogo de piezas: figuras 3D, lámparas, organizadores y más.</p>
+              <a href="#" data-page="laser" class="teaser-link">Ver corte láser →</a>
+            </div>
+          </div>
+          <div class="book-spine"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="proceso">
+    <div class="wrap">
+      <div class="section-head center">
+        <p class="eyebrow">Cómo trabajamos</p>
+        <h2>De la idea a la instalación, <strong>en un mismo taller.</strong></h2>
+        <p>Diseñamos, fabricamos e instalamos nosotros mismos, sin intermediarios — de principio a fin.</p>
+      </div>
+      <div class="proceso-img-grid">
+        <div class="proceso-step">
+          <img src="fotos/paso-01-consulta.jpg" alt="Paso 1: Consulta">
+          <div class="step-info"><span class="step-num">01</span><h3>Consulta</h3></div>
+        </div>
+        <div class="proceso-step">
+          <img src="fotos/paso-02-diseno.jpg" alt="Paso 2: Diseño y cotización">
+          <div class="step-info"><span class="step-num">02</span><h3>Diseño y cotización</h3></div>
+        </div>
+        <div class="proceso-step">
+          <img src="fotos/paso-03-fabricacion.jpg" alt="Paso 3: Fabricación">
+          <div class="step-info"><span class="step-num">03</span><h3>Fabricación</h3></div>
+        </div>
+        <div class="proceso-step">
+          <img src="fotos/paso-04-entrega.jpg" alt="Paso 4: Entrega e instalación">
+          <div class="step-info"><span class="step-num">04</span><h3>Entrega e instalación</h3></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:var(--muted-bg);">
+    <div class="wrap">
+      <div class="section-head center">
+        <p class="eyebrow">Qué incluye</p>
+        <h2>Una propuesta clara antes de fabricar nada.</h2>
+      </div>
+      <ul class="deliver-grid">
+        <li>
+          <img class="deliver-img" src="fotos/incluye-01-cotizacion.jpg" alt="Cotización detallada en pantalla, con muestras de materiales sobre el escritorio">
+          <div class="deliver-body"><h4>Cotización detallada</h4><p>Materiales, acabados y tiempos, <strong>por escrito.</strong></p></div>
+        </li>
+        <li>
+          <img class="deliver-img" src="fotos/incluye-02-diseno.jpg" alt="Boceto, foto de referencia y muestras de material sobre la mesa">
+          <div class="deliver-body"><h4>Diseño o referencia</h4><p>Boceto, foto de referencia o muestra de material.</p></div>
+        </li>
+        <li>
+          <img class="deliver-img" src="fotos/incluye-03-materiales.jpg" alt="Muestras de MDF, melamina, acrílico, aluminio y acero para elegir acabados">
+          <div class="deliver-body"><h4>Definición de materiales</h4><p>Elegimos juntos <strong>materiales, colores</strong> y acabados.</p></div>
+        </li>
+        <li>
+          <img class="deliver-img" src="fotos/incluye-04-propuesta.jpg" alt="Presentación de la propuesta final en pantalla, con dimensiones y materiales">
+          <div class="deliver-body"><h4>Propuesta final</h4><p>Una solución definida <strong>antes de fabricar.</strong></p></div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head center">
+        <p class="eyebrow">Preguntas frecuentes</p>
+        <h2>Antes de empezar.</h2>
+      </div>
+      <div class="faq-list">
+        <details><summary>¿Cuánto tarda un pedido?</summary><p>Depende del proyecto — te confirmamos el tiempo exacto junto con tu cotización.</p></details>
+        <details><summary>¿Hacen instalación?</summary><p>Sí. Para letreros y mobiliario que lo requieran, instalamos directamente en tu negocio u obra.</p></details>
+        <details><summary>¿Piden anticipo?</summary><p>Te lo indicamos junto con tu cotización, según el tipo y tamaño del proyecto.</p></details>
+        <details><summary>¿Trabajan fuera de mi ciudad?</summary><p>Escríbenos con tu ubicación y el proyecto en mente y te confirmamos cobertura.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section id="nosotros" style="background:var(--surface);">
+    <div class="wrap about-grid">
+      <div>
+        <p class="eyebrow">Nosotros</p>
+        <h2 style="margin-bottom:18px;">Tecnología, ingeniería y oficio, en un mismo taller.</h2>
+        <p style="color:var(--muted);max-width:52ch;">ESMA Soluciones de Fabricación Avanzada es una empresa especializada en la fabricación de mobiliario y soluciones industriales, combinando tecnología, ingeniería y procesos de manufactura avanzada. Contamos con experiencia en maquinados CNC, corte y grabado láser, transformación de materiales y fabricación de productos a la medida, ofreciendo soluciones de alta calidad, precisión y eficiencia para nuestros clientes.</p>
+      </div>
+      <div class="pillars-img">
+        <figure class="pillar-tile"><img src="fotos/pillar-precision.jpg" alt="Precisión — procesos controlados"><figcaption>Precisión</figcaption></figure>
+        <figure class="pillar-tile"><img src="fotos/pillar-materiales.jpg" alt="Materiales — elegidos por uso y acabado"><figcaption>Materiales</figcaption></figure>
+        <figure class="pillar-tile"><img src="fotos/pillar-medida.jpg" alt="A la medida — diseño para tu espacio"><figcaption>A la medida</figcaption></figure>
+        <figure class="pillar-tile"><img src="fotos/pillar-taller.jpg" alt="Un solo taller — del corte a la instalación"><figcaption>Un solo taller</figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="featured-project">
+    <div class="wrap featured-grid">
+      <div class="featured-media">
+        <img src="fotos/radioscan-night.jpg" alt="Letrero circular iluminado de RadioScan, Imagenología Dental">
+      </div>
+      <div class="featured-copy">
+        <p class="eyebrow">Proyecto destacado</p>
+        <h2>Un letrero que ilumina la fachada de RadioScan.</h2>
+        <p>Diseñamos y fabricamos el letrero circular retroiluminado para RadioScan, Imagenología Dental — visible de día y de noche, resistente a la intemperie.</p>
+        <a href="#" data-page="proyectos" class="btn btn-primary">Ver más proyectos →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contacto">
+    <div class="wrap contact-inner">
+      <div class="contact-info">
+        <p class="eyebrow">Hablemos</p>
+        <h2>¿Ya tienes un proyecto en mente?</h2>
+        <p class="lede2">Cuéntanos qué necesitas fabricar y te enviamos una propuesta a la medida — sin compromiso.</p>
+        <div class="contact-links">
+          <!-- PLACEHOLDER: reemplazar número/correo reales -->
+          <a href="https://wa.me/5210000000000" target="_blank" rel="noopener">WhatsApp <span class="tiny">→</span></a>
+          <a href="mailto:contacto@esmaindustrial.mx">contacto@esmaindustrial.mx <span class="tiny">→</span></a>
+          <a href="https://www.instagram.com/esma_industrial" target="_blank" rel="noopener">@esma_industrial <span class="tiny">→</span></a>
+        </div>
+      </div>
+      <form class="contact-form" id="contactForm">
+        <label>Nombre<input type="text" name="nombre" required></label>
+        <label>Teléfono o correo<input type="text" name="contacto" required></label>
+        <label>Tipo de proyecto
+          <select name="tipo">
+            <option>Muebles a medida</option>
+            <option>Letreros</option>
+            <option>Corte láser (acrílico/MDF)</option>
+          </select>
+        </label>
+        <label>Cuéntanos tu proyecto<textarea name="mensaje" rows="4" required></textarea></label>
+        <button type="submit" class="btn btn-primary">Enviar solicitud</button>
+      </form>
+    </div>
+  </section>
+</div>
+
+<div class="page" id="page-proyectos" hidden>
+  <section id="proyectos-full" style="background:var(--surface);">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Proyectos</p>
+        <h2>Así se ve nuestro alcance.</h2>
+      </div>
+      <div class="proj-grid">
+        <article class="proj-card">
+          <div class="rotator">
+            <div class="rotator-slide active"><img src="fotos/closet-system.jpg" alt="Clóset a medida"></div>
+            <div class="rotator-slide"><img src="fotos/tv-wall-unit.jpg" alt="Centro de entretenimiento a medida"></div>
+            <div class="rotator-dots"><span class="active"></span><span></span></div>
+          </div>
+          <div class="proj-body">
+            <span class="proj-tag">Muebles</span>
+            <h3>Clósets y muebles a medida</h3>
+            <p>Diseño y fabricación de closets, centros de entretenimiento y mobiliario a la medida del espacio.</p>
+            <a class="link-arrow" href="#" data-page="proyectos">Ver el proyecto →</a>
+          </div>
+        </article>
+        <article class="proj-card">
+          <div class="rotator">
+            <div class="rotator-slide active"><img src="fotos/cristian-correa.jpg" alt="Letrero Dr. Cristian Correa"></div>
+            <div class="rotator-slide"><img src="fotos/radioscan.jpg" alt="Letrero RadioScan"></div>
+            <div class="rotator-dots"><span class="active"></span><span></span></div>
+          </div>
+          <div class="proj-body">
+            <span class="proj-tag">Letreros</span>
+            <h3>Identidad de marca para consultorio</h3>
+            <p>Letrero backlit, directorio y señalización interior para una clínica.</p>
+            <a class="link-arrow" href="#" data-page="proyectos">Ver el proyecto →</a>
+          </div>
+        </article>
+        <article class="proj-card">
+          <div class="rotator">
+            <div class="rotator-slide active"><img src="fotos/azteca-caddy.jpg" alt="Organizador de madera grabado"></div>
+            <div class="rotator-slide"><img src="fotos/wedding-box.jpg" alt="Caja de madera grabada con láser"></div>
+            <div class="rotator-dots"><span class="active"></span><span></span></div>
+          </div>
+          <div class="proj-body">
+            <span class="proj-tag">Corte láser</span>
+            <h3>Accesorios en acrílico y MDF</h3>
+            <p>Piezas y accesorios de corte láser bajo pedido, con control de calidad por lote.</p>
+            <a class="link-arrow" href="#" data-page="proyectos">Ver el proyecto →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+
+</div>
+
+<div class="page" id="page-muebles" hidden>
+  <section class="line-hero">
+    <div class="wrap line-hero-grid">
+    <div class="line-hero-content">
+      <p class="eyebrow">Muebles</p>
+      <h1 class="line-h1">Muebles a medida</h1>
+      <p class="lede">Mobiliario, closets y piezas diseñadas para tu espacio: de mesas y centros de entretenimiento a carritos y recepciones a medida.</p>
+      <div class="hero-actions">
+        <a href="#" data-anchor="contacto" class="btn btn-primary">Solicitar cotización →</a>
+        <a href="#line-gallery-muebles" class="link-arrow">Ver galería ↓</a>
+      </div>
+    </div>
+    <div class="line-hero-media">
+      <div class="rotator">
+        <div class="rotator-slide active"><img src="fotos/tv-wall-unit.jpg" alt="Centro de entretenimiento a medida"></div>
+        <div class="rotator-slide"><img src="fotos/coffee-table.jpg" alt="Mesa de centro de madera"></div>
+        <div class="rotator-slide"><img src="fotos/khanda-cart.jpg" alt="Carrito de exhibición a medida"></div>
+        <div class="rotator-dots"><span class="active"></span><span></span><span></span></div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <section class="line-gallery" id="line-gallery-muebles" style="background:var(--surface);">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Nuestro trabajo</p>
+        <h2>Trabajos de esta línea</h2>
+      </div>
+      <div class="gallery-grid">
+<figure class="tile" data-cat="muebles">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/coffee-table.jpg" alt="Mesa de centro de madera"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Mesa de centro</b><span>Madera</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="muebles">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/closet-system.jpg" alt="Clóset a medida"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Clóset a medida</b><span>MDF</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="muebles">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/mm-boutique.jpg" alt="Recepción MM Boutique"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Recepción a medida</b><span>Madera</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="muebles">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/munch-cart.jpg" alt="Carrito Munch, papas preparadas"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Carrito Munch</b><span>Madera</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="muebles">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/walnut-table.jpg" alt="Mesa lateral de madera"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Mesa lateral</b><span>Madera</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="muebles">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/recamara-closet.jpg" alt="Recámara con clóset y escritorio a medida"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Recámara a medida</b><span>Madera</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="page" id="page-letreros" hidden>
+  <section class="line-hero">
+    <div class="wrap line-hero-grid">
+    <div class="line-hero-content">
+      <p class="eyebrow">Letreros</p>
+      <h1 class="line-h1">Letreros e identidad de marca</h1>
+      <p class="lede">Letreros iluminados, acrílico espejo, neón y placas para consultorios, negocios y oficinas — diseño, fabricación e instalación.</p>
+      <div class="hero-actions">
+        <a href="#" data-anchor="contacto" class="btn btn-primary">Solicitar cotización →</a>
+        <a href="#line-gallery-letreros" class="link-arrow">Ver galería ↓</a>
+      </div>
+    </div>
+    <div class="line-hero-media">
+      <div class="rotator">
+        <div class="rotator-slide active"><img src="fotos/vettanoia.jpg" alt="Letrero Vettanoia"></div>
+        <div class="rotator-slide"><img src="fotos/moai.jpg" alt="Letrero MOAI Dental"></div>
+        <div class="rotator-slide"><img src="fotos/prodonto.jpg" alt="Letrero Prodonto"></div>
+        <div class="rotator-dots"><span class="active"></span><span></span><span></span></div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <section class="line-gallery" id="line-gallery-letreros" style="background:var(--surface);">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Nuestro trabajo</p>
+        <h2>Trabajos de esta línea</h2>
+      </div>
+      <div class="gallery-grid">
+<figure class="tile" data-cat="letreros">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/marvi-moda.jpg" alt="Letrero Marvi Moda"></div>
+            <div class="rotator-slide"><img src="fotos/wings-sign.jpg" alt="Letrero circular colgante"></div>
+            <div class="rotator-dots"><span class="active"></span><span></span></div>
+          </div>
+          <figcaption><b>Letrero colgante</b><span>Madera / metal</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="letreros">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/linea-italia.jpg" alt="Letrero corporativo Línea Italia"></div>
+            <div class="rotator-slide"><img src="fotos/dra-alejandra.jpg" alt="Letrero Dra. Alejandra"></div>
+            <div class="rotator-dots"><span class="active"></span><span></span></div>
+          </div>
+          <figcaption><b>Letrero corporativo</b><span>Acrílico</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="letreros">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/paulina-loera.jpg" alt="Paulina Loera Studio"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Paulina Loera Studio</b><span>Acrílico</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="letreros">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/dr-enrique-nieto.jpg" alt="Dr. Enrique Nieto Flores"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Dr. Enrique Nieto Flores</b><span>Madera + LED</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="letreros">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/radioscan-2.jpg" alt="RadioScan fachada"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>RadioScan (fachada)</b><span>Metal</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="letreros">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/linea-italia-2.jpg" alt="Línea Italia recepción"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Línea Italia (recepción)</b><span>Metal</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="letreros">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/shalom-interior.jpg" alt="Shalom Estetic interior"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Shalom Estetic (interior)</b><span>Neón + acrílico</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="letreros">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/pito-locos-neon.jpg" alt="Pito Locos Cantina Bar, letrero de neón en fabricación"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Pito Locos Cantina Bar</b><span>Neón</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="letreros">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/laboratorio-window.jpg" alt="Laboratorio dental"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Laboratorio dental</b><span>Vinil</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="letreros">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/physikal.jpg" alt="Physikal"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Physikal</b><span>Acrílico espejo</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="letreros">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/laura-martinez-exterior.jpg" alt="Clínica Dental Dra. Laura Martínez"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Clínica Dental Dra. Laura Martínez</b><span>Acero</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="letreros">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/cristian-correa-2.jpg" alt="Dr. Cristian Correa recepción"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Dr. Cristian Correa (recepción)</b><span>Acrílico</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="letreros">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/mayra-mora.jpg" alt="Mayra Y. Mora Jiménez, cosmetóloga"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Mayra Y. Mora Jiménez</b><span>Acrílico</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="letreros">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/scultura.jpg" alt="Scultura"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Scultura</b><span>Metal + LED</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="letreros">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/come-ride-neon.jpg" alt="Power Cycle, interior con neón"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Power Cycle (interior)</b><span>Neón</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="letreros">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/peter-garage-neon.jpg" alt="Peter Garage"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Peter Garage</b><span>Neón</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="letreros">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/clinica-visual.jpg" alt="Clínica Visual Óptica"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Clínica Visual Óptica</b><span>Metal</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="letreros">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/daniela-martinez-interior.jpg" alt="Dra. Daniela Martínez, interior"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Dra. Daniela Martínez (interior)</b><span>Acrílico espejo</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="letreros">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/radioscan-night.jpg" alt="RadioScan, nocturna"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>RadioScan (nocturna)</b><span>Metacrilato</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="letreros">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/jd-moda.jpg" alt="JD Moda"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>JD Moda</b><span>LED</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div class="page" id="page-laser" hidden>
+  <section class="line-hero">
+    <div class="wrap line-hero-grid">
+    <div class="line-hero-content">
+      <p class="eyebrow">Corte láser</p>
+      <h1 class="line-h1">Corte láser · Acrílico, MDF y metal</h1>
+      <p class="lede">Piezas y accesorios de corte láser y grabado: regalos personalizados, organizadores, letreros decorativos y piezas a la medida.</p>
+      <div class="hero-actions">
+        <a href="#" data-anchor="contacto" class="btn btn-primary">Solicitar cotización →</a>
+        <a href="#line-gallery-laser" class="link-arrow">Ver galería ↓</a>
+      </div>
+    </div>
+    <div class="line-hero-media">
+      <div class="rotator">
+        <div class="rotator-slide active"><img src="fotos/wedding-box.jpg" alt="Caja de madera grabada con láser"></div>
+        <div class="rotator-slide"><img src="fotos/quote-sign.jpg" alt="Letrero decorativo de acrílico"></div>
+        <div class="rotator-slide"><img src="fotos/azteca-caddy.jpg" alt="Organizador de madera grabado"></div>
+        <div class="rotator-dots"><span class="active"></span><span></span><span></span></div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <section class="line-gallery" id="line-gallery-laser" style="background:var(--surface);">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Nuestro trabajo</p>
+        <h2>Trabajos de esta línea</h2>
+      </div>
+      <div class="gallery-grid">
+<figure class="tile" data-cat="laser">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/quote-sign.jpg" alt="Letrero decorativo de acrílico"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Frase decorativa</b><span>Acrílico</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="laser">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/azteca-caddy.jpg" alt="Organizador de madera grabado"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Organizador grabado</b><span>Madera</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="laser">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/termo-teamo.jpg" alt="Termo personalizado grabado"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Termo personalizado</b><span>Acero inoxidable</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="laser">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/termo-gloria.jpg" alt="Termo personalizado grabado con nombre"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Termo personalizado</b><span>Acero inoxidable</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="laser">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/termo-pareja.jpg" alt="Termo personalizado grabado"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Termo personalizado</b><span>Acero inoxidable</span></figcaption>
+        </figure>
+<figure class="tile" data-cat="laser">
+          <div class="rotator">            <div class="rotator-slide active"><img src="fotos/termo-harry.jpg" alt="Termo personalizado grabado con mascota"></div>
+            <div class="rotator-dots"><span class="active"></span></div>
+          </div>
+          <figcaption><b>Termo personalizado</b><span>Acero inoxidable</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+</main>
+
+<a class="wa-fab" href="https://wa.me/5210000000000" target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.9-2-1s-.5-.1-.7.1-.8 1-.9 1.2-.3.2-.6.1a7.9 7.9 0 0 1-2.3-1.4 8.6 8.6 0 0 1-1.6-2c-.2-.3 0-.5.1-.6l.4-.5.2-.4a.5.5 0 0 0 0-.4c-.1-.1-.7-1.6-.9-2.2s-.5-.5-.7-.5h-.6a1.1 1.1 0 0 0-.8.4A3.5 3.5 0 0 0 6 10c0 1.6 1.2 3.2 1.3 3.4s2.3 3.6 5.7 5c3.3 1.3 3.3.9 3.9.8s1.9-.8 2.2-1.5.3-1.4.2-1.5-.3-.2-.6-.3Z"/><path d="M12 2a10 10 0 0 0-8.6 15L2 22l5.2-1.4A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.1l-.3-.2-3.1.8.8-3-.2-.3A8.2 8.2 0 1 1 20.2 12 8.2 8.2 0 0 1 12 20.2Z"/></svg>
+  <span>Habla con un asesor</span>
+</a>
+
+<footer class="site-footer footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="brand">
+          <img class="brand-logo" src="fotos/logo-esma-metal.png" alt="ESMA Industrial">
+        </div>
+        <p class="tag">Fabricación avanzada, mobiliario y señalética a la medida.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/esma_industrial" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Explorar</h5>
+        <ul>
+          <li><a href="#" data-page="muebles">Muebles</a></li>
+          <li><a href="#" data-page="letreros">Letreros</a></li>
+          <li><a href="#" data-page="laser">Corte láser</a></li>
+          <li><a href="#" data-page="proyectos">Proyectos</a></li>
+          <li><a href="#" data-anchor="proceso">Proceso</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Nosotros</h5>
+        <ul>
+          <li><a href="#" data-anchor="nosotros">Sobre nosotros</a></li>
+          <li><a href="https://claude.ai/code/artifact/6becf799-34cd-499e-8763-1fad9846c4f5" target="_blank">Catálogo (PDF)</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contacto</h5>
+        <ul>
+          <li><a href="https://wa.me/5210000000000" target="_blank" rel="noopener">WhatsApp</a></li>
+          <li><a href="mailto:contacto@esmaindustrial.mx">contacto@esmaindustrial.mx</a></li>
+          <li><a href="https://www.instagram.com/esma_industrial" target="_blank" rel="noopener">Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">© <span id="year"></span> ESMA INDUSTRIAL · CREACIONES INDUSTRIALES</div>
+  </div>
+</footer>
+
+<script>
+  (function initSplash(){
+    const splash = document.getElementById('splash');
+    if(!splash) return;
+    const dismiss = () => {
+      splash.classList.add('hide');
+      setTimeout(() => splash.remove(), 550);
+    };
+    window.addEventListener('load', () => setTimeout(dismiss, 650));
+    // Respaldo por si 'load' se retrasa (fuentes/imagenes lentas) — nunca
+    // dejar al visitante atorado en la pantalla de entrada.
+    setTimeout(dismiss, 2500);
+  })();
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const navToggle = document.getElementById('navToggle');
+  const navOverlay = document.getElementById('navOverlay');
+  function closeNav(){ navOverlay.classList.remove('open'); navToggle.classList.remove('open'); navToggle.setAttribute('aria-expanded','false'); }
+  navToggle.addEventListener('click', () => {
+    const open = navOverlay.classList.toggle('open');
+    navToggle.classList.toggle('open', open);
+    navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  navOverlay.querySelectorAll('a[data-nav]').forEach(a => a.addEventListener('click', closeNav));
+
+  function showPage(id, sub){
+    document.querySelectorAll('.page').forEach(p => { p.hidden = (p.id !== 'page-' + id); });
+    window.scrollTo(0, 0);
+    if(history.pushState) history.pushState(null, '', '#/' + id);
+    if(sub){
+      requestAnimationFrame(() => {
+        const el = document.getElementById(sub);
+        if(el) el.scrollIntoView({behavior:'smooth', block:'start'});
+      });
+    }
+  }
+  function goHomeAnchor(anchor){
+    showPage('home');
+    requestAnimationFrame(() => {
+      const el = document.getElementById(anchor);
+      if(el) el.scrollIntoView({behavior:'smooth'});
+    });
+  }
+  document.querySelectorAll('[data-page]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      showPage(a.dataset.page, a.dataset.sub);
+    });
+  });
+  document.querySelectorAll('[data-anchor]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      goHomeAnchor(a.dataset.anchor);
+    });
+  });
+  (function initRoute(){
+    const h = location.hash.replace('#/', '');
+    if(h && document.getElementById('page-' + h)) showPage(h);
+  })();
+
+  (function initMiniBook(){
+    const book = document.getElementById('miniBook');
+    if(!book) return;
+    const leaves = Array.from(book.querySelectorAll('.leaf'));
+    const catBtns = Array.from(book.querySelectorAll('.book-cat-btn'));
+    const prevBtn = document.getElementById('bookPrev');
+    const nextBtn = document.getElementById('bookNext');
+    const restartBtn = document.getElementById('bookRestart');
+    const counterEl = document.getElementById('bookCounter');
+    const CAT_LABELS = { muebles: 'Muebles', letreros: 'Letreros', laser: 'Corte láser' };
+    let idx = 0;
+    function render(){
+      leaves.forEach((leaf, i) => { leaf.classList.toggle('active', i === idx); });
+      prevBtn.disabled = idx === 0;
+      nextBtn.disabled = idx >= leaves.length;
+      if(idx < leaves.length){
+        const leaf = leaves[idx];
+        const cat = leaf.dataset.cat;
+        const catLeaves = leaves.filter(l => l.dataset.cat === cat);
+        const posInCat = catLeaves.indexOf(leaf) + 1;
+        counterEl.textContent = CAT_LABELS[cat] + ' · ' + posInCat + '/' + catLeaves.length;
+        catBtns.forEach(b => b.classList.toggle('active', b.dataset.cat === cat));
+      } else {
+        counterEl.textContent = 'Fin del catálogo';
+        catBtns.forEach(b => b.classList.remove('active'));
+      }
+    }
+    function next(){ if(idx < leaves.length){ idx++; render(); } }
+    function prev(){ if(idx > 0){ idx--; render(); } }
+    function goToCat(cat){
+      const i = leaves.findIndex(l => l.dataset.cat === cat);
+      if(i >= 0){ idx = i; render(); }
+    }
+    nextBtn.addEventListener('click', next);
+    prevBtn.addEventListener('click', prev);
+    restartBtn.addEventListener('click', () => { idx = 0; render(); });
+    leaves.forEach((leaf, i) => {
+      leaf.addEventListener('click', (e) => {
+        if(e.target.closest('a')) return;
+        if(i === idx) next();
+      });
+    });
+    catBtns.forEach(b => {
+      b.addEventListener('click', () => goToCat(b.dataset.cat));
+    });
+    render();
+  })();
+
+  function applyFilter(f){
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.toggle('active', t.dataset.filter === f));
+    document.querySelectorAll('.tile').forEach(tile => {
+      tile.style.display = (f === 'all' || tile.dataset.cat === f) ? '' : 'none';
+    });
+  }
+  document.querySelectorAll('.filter-tab').forEach(tab => {
+    tab.addEventListener('click', () => applyFilter(tab.dataset.filter));
+  });
+  document.querySelectorAll('[data-filter]').forEach(el => {
+    if(el.classList.contains('filter-tab')) return;
+    el.addEventListener('click', () => applyFilter(el.dataset.filter));
+  });
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduceMotion){
+    document.querySelectorAll('.rotator').forEach((media, idx) => {
+      const slides = media.querySelectorAll('.rotator-slide');
+      const dots = media.querySelectorAll('.rotator-dots span');
+      if(slides.length < 2) return;
+      let i = 0;
+      setInterval(() => {
+        i = (i + 1) % slides.length;
+        slides.forEach((s, n) => s.classList.toggle('active', n === i));
+        dots.forEach((d, n) => d.classList.toggle('active', n === i));
+      }, 3000 + (idx % 5) * 350);
+    });
+  }
+
+  document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const fd = new FormData(this);
+    const subject = encodeURIComponent('Solicitud de cotización — ' + fd.get('tipo'));
+    const body = encodeURIComponent(
+      'Nombre: ' + fd.get('nombre') + '\n' +
+      'Contacto: ' + fd.get('contacto') + '\n' +
+      'Tipo de proyecto: ' + fd.get('tipo') + '\n\n' +
+      fd.get('mensaje')
+    );
+    window.location.href = 'mailto:contacto@esmaindustrial.mx?subject=' + subject + '&body=' + body;
+  });
+</script>
+</body>
+</html>
