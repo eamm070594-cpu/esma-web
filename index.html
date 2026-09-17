@@ -313,6 +313,11 @@
   .featured-copy .eyebrow{color:var(--blue-light);}
   .featured-copy h2{color:#fff;margin-bottom:14px;}
   .featured-copy p{color:rgba(245,247,249,.72);max-width:46ch;margin-bottom:26px;}
+  .featured-picker{display:flex;gap:10px;margin-top:22px;}
+  .featured-thumb{width:60px;height:60px;flex:none;border-radius:10px;overflow:hidden;border:2px solid transparent;cursor:pointer;padding:0;background:none;opacity:.55;transition:opacity .2s ease, border-color .2s ease;}
+  .featured-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+  .featured-thumb:hover{opacity:.85;}
+  .featured-thumb.active{opacity:1;border-color:var(--blue-light);}
   @media(max-width:860px){
     .featured-grid{grid-template-columns:1fr;gap:28px;}
     .featured-media{order:-1;}
@@ -405,6 +410,32 @@
   @keyframes splashPulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.92;transform:scale(1.03);}}
   @media (prefers-reduced-motion: reduce){ .splash img{animation:none;} }
   @media(max-width:600px){ .splash img{height:140px;} }
+
+  /* ---------- CÓMO SE CONSTRUYE (diagrama + video, página Letreros) ---------- */
+  .build-explainer{padding:12px 0 72px;}
+  .build-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+  .build-diagram,.build-video{margin:0;min-width:0;height:440px;border-radius:24px;overflow:hidden;border:1px solid var(--line);}
+  .build-diagram{background:#fff;}
+  .build-diagram img{width:100%;height:100%;object-fit:contain;display:block;}
+  .build-video{background:var(--dark);}
+  .build-video video{width:100%;height:100%;object-fit:contain;display:block;}
+  @media(max-width:980px){ .build-grid{grid-template-columns:1fr;} .build-diagram,.build-video{height:360px;} }
+  @media(max-width:600px){ .build-diagram,.build-video{height:280px;} }
+
+  /* ---------- VISUALIZA TU ESPACIO (después del hero) ---------- */
+  .space-viz{padding:0 0 88px;}
+  .space-viz-card{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center;background:var(--surface);border-radius:28px;padding:36px;}
+  .space-viz-media{border-radius:20px;overflow:hidden;background:var(--dark);height:460px;}
+  .space-viz-media video{width:100%;height:100%;object-fit:contain;display:block;}
+  .space-viz-copy h2{margin:10px 0 14px;}
+  .space-viz-copy .lede{color:var(--muted);margin-bottom:22px;}
+  .space-viz-steps{list-style:none;margin:0 0 26px;padding:0;display:flex;flex-direction:column;gap:10px;}
+  .space-viz-steps li{display:flex;align-items:baseline;gap:12px;font-size:.95rem;color:var(--ink);}
+  .space-viz-steps .num{font-weight:700;color:var(--blue);font-size:.82rem;min-width:22px;}
+  @media(max-width:980px){
+    .space-viz-card{grid-template-columns:1fr;padding:24px;}
+    .space-viz-media{order:-1;height:300px;}
+  }
 </style>
 </head>
 <body>
@@ -417,6 +448,7 @@
       <img class="brand-logo" src="fotos/logo-esma-metal.png" alt="ESMA Industrial">
     </a>
     <nav class="nav-links">
+      <a href="#" data-page="home">Inicio</a>
       <a href="#" data-page="muebles">Muebles</a>
       <a href="#" data-page="letreros">Letreros</a>
       <a href="#" data-page="laser">Corte láser</a>
@@ -436,6 +468,7 @@
 
 <div class="nav-overlay" id="navOverlay">
   <nav class="nav-overlay-links">
+    <a href="#" data-nav data-page="home">Inicio</a>
     <a href="#" data-nav data-page="muebles">Muebles</a>
     <a href="#" data-nav data-page="letreros">Letreros</a>
     <a href="#" data-nav data-page="laser">Corte láser</a>
@@ -453,10 +486,27 @@
 
 <main id="top">
 <div class="page" id="page-home">
+  <section id="nosotros" style="background:var(--surface);">
+    <div class="wrap about-grid">
+      <div>
+        <p class="eyebrow">Nosotros</p>
+        <h2 style="margin-bottom:14px;">De la idea a la realidad.</h2>
+        <p style="font-weight:600;color:var(--ink);margin-bottom:14px;">Diseñamos. Fabricamos. Transformamos.</p>
+        <p style="color:var(--muted);max-width:52ch;margin-bottom:18px;">En ESMA Industrial convertimos conceptos en soluciones que se pueden ver, tocar y vivir. Combinamos diseño, tecnología CNC, corte láser y fabricación especializada para crear mobiliario, elementos comerciales y proyectos personalizados con precisión y carácter.</p>
+        <p style="color:var(--blue);font-weight:600;">— Tu idea. Nuestra tecnología. Un resultado que destaca.</p>
+      </div>
+      <div class="build-video">
+        <video autoplay muted loop playsinline poster="fotos/logo-esma-metal.png">
+          <source src="fotos/nosotros-video.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <p class="eyebrow">Soluciones de fabricación a la medida</p>
+        <p class="eyebrow">Proyectos reales, fabricados en nuestro taller</p>
         <h1>La solución a la medida para <strong>cada proyecto.</strong></h1>
         <p class="lede">Resolvemos tu proyecto con muebles, letreros y piezas de corte láser fabricados en nuestro taller — con tecnología, ingeniería y procesos de manufactura avanzada.</p>
         <div class="hero-actions">
@@ -472,12 +522,33 @@
           <div class="rotator-slide"><img src="fotos/radioscan-night.jpg" alt="Letrero circular iluminado de noche"></div>
           <div class="rotator-slide"><img src="fotos/linea-italia.jpg" alt="Letrero corporativo interior"></div>
           <div class="rotator-slide"><img src="fotos/tv-wall-unit.jpg" alt="Centro de entretenimiento a medida"></div>
-          <div class="rotator-slide"><img src="fotos/closet-system.jpg" alt="Clóset a medida"></div>
           <div class="rotator-slide"><img src="fotos/wedding-box.jpg" alt="Caja de madera grabada con láser"></div>
           <div class="rotator-slide"><img src="fotos/moai.jpg" alt="Letrero de madera y acrílico"></div>
           <div class="rotator-slide"><img src="fotos/mm-boutique.jpg" alt="Letrero circular retroiluminado en boutique"></div>
-          <div class="rotator-dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          <div class="rotator-dots"><span class="active"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="space-viz">
+    <div class="wrap space-viz-card">
+      <div class="space-viz-media">
+        <video autoplay muted loop playsinline poster="fotos/logo-esma-metal.png">
+          <source src="fotos/oficina-video.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="space-viz-copy">
+        <p class="eyebrow">Diseño de espacios</p>
+        <h2>Visualiza tu espacio antes de decidir.</h2>
+        <p class="lede">Te acompañamos del primer boceto a la instalación final. Diseño, fabricación y montaje bajo un mismo techo.</p>
+        <ol class="space-viz-steps">
+          <li><span class="num">01</span>Entendemos qué necesita tu espacio</li>
+          <li><span class="num">02</span>Proyectamos el espacio en 3D</li>
+          <li><span class="num">03</span>Fabricamos a la medida</li>
+          <li><span class="num">04</span>Instalamos y entregamos llave en mano</li>
+        </ol>
+        <a href="#" data-anchor="contacto" class="btn btn-primary">Agenda una asesoría →</a>
       </div>
     </div>
   </section>
@@ -730,7 +801,7 @@
     <div class="wrap">
       <div class="section-head center">
         <p class="eyebrow">Qué incluye</p>
-        <h2>Una propuesta clara antes de fabricar nada.</h2>
+        <h2>Una propuesta clara antes de fabricar, para que puedas visualizar y aprobar el resultado final.</h2>
       </div>
       <ul class="deliver-grid">
         <li>
@@ -768,32 +839,24 @@
     </div>
   </section>
 
-  <section id="nosotros" style="background:var(--surface);">
-    <div class="wrap about-grid">
-      <div>
-        <p class="eyebrow">Nosotros</p>
-        <h2 style="margin-bottom:18px;">Tecnología, ingeniería y oficio, en un mismo taller.</h2>
-        <p style="color:var(--muted);max-width:52ch;">ESMA Soluciones de Fabricación Avanzada es una empresa especializada en la fabricación de mobiliario y soluciones industriales, combinando tecnología, ingeniería y procesos de manufactura avanzada. Contamos con experiencia en maquinados CNC, corte y grabado láser, transformación de materiales y fabricación de productos a la medida, ofreciendo soluciones de alta calidad, precisión y eficiencia para nuestros clientes.</p>
-      </div>
-      <div class="pillars-img">
-        <figure class="pillar-tile"><img src="fotos/pillar-precision.jpg" alt="Precisión — procesos controlados"><figcaption>Precisión</figcaption></figure>
-        <figure class="pillar-tile"><img src="fotos/pillar-materiales.jpg" alt="Materiales — elegidos por uso y acabado"><figcaption>Materiales</figcaption></figure>
-        <figure class="pillar-tile"><img src="fotos/pillar-medida.jpg" alt="A la medida — diseño para tu espacio"><figcaption>A la medida</figcaption></figure>
-        <figure class="pillar-tile"><img src="fotos/pillar-taller.jpg" alt="Un solo taller — del corte a la instalación"><figcaption>Un solo taller</figcaption></figure>
-      </div>
-    </div>
-  </section>
 
   <section class="featured-project">
     <div class="wrap featured-grid">
       <div class="featured-media">
-        <img src="fotos/radioscan-night.jpg" alt="Letrero circular iluminado de RadioScan, Imagenología Dental">
+        <img id="featuredImg" src="fotos/radioscan-night.jpg" alt="Letrero circular iluminado de RadioScan, Imagenología Dental">
       </div>
       <div class="featured-copy">
-        <p class="eyebrow">Proyecto destacado</p>
-        <h2>Un letrero que ilumina la fachada de RadioScan.</h2>
-        <p>Diseñamos y fabricamos el letrero circular retroiluminado para RadioScan, Imagenología Dental — visible de día y de noche, resistente a la intemperie.</p>
+        <p class="eyebrow">Proyectos reales destacados</p>
+        <h2 id="featuredTitle">Un letrero que ilumina la fachada de RadioScan.</h2>
+        <p id="featuredDesc">Diseñamos y fabricamos el letrero circular retroiluminado para RadioScan, Imagenología Dental — visible de día y de noche, resistente a la intemperie.</p>
         <a href="#" data-page="proyectos" class="btn btn-primary">Ver más proyectos →</a>
+        <div class="featured-picker" id="featuredPicker">
+          <button type="button" class="featured-thumb active" data-idx="0" aria-label="RadioScan"><img src="fotos/radioscan-night.jpg" alt=""></button>
+          <button type="button" class="featured-thumb" data-idx="1" aria-label="Línea Italia"><img src="fotos/linea-italia.jpg" alt=""></button>
+          <button type="button" class="featured-thumb" data-idx="2" aria-label="Centro de entretenimiento"><img src="fotos/tv-wall-unit.jpg" alt=""></button>
+          <button type="button" class="featured-thumb" data-idx="3" aria-label="Caja grabada con láser"><img src="fotos/wedding-box.jpg" alt=""></button>
+          <button type="button" class="featured-thumb" data-idx="4" aria-label="Vettanoia"><img src="fotos/vettanoia.jpg" alt=""></button>
+        </div>
       </div>
     </div>
   </section>
@@ -883,25 +946,16 @@
 </div>
 
 <div class="page" id="page-muebles" hidden>
-  <section class="line-hero">
-    <div class="wrap line-hero-grid">
-    <div class="line-hero-content">
-      <p class="eyebrow">Muebles</p>
-      <h1 class="line-h1">Muebles a medida</h1>
-      <p class="lede">Mobiliario, closets y piezas diseñadas para tu espacio: de mesas y centros de entretenimiento a carritos y recepciones a medida.</p>
-      <div class="hero-actions">
-        <a href="#" data-anchor="contacto" class="btn btn-primary">Solicitar cotización →</a>
-        <a href="#line-gallery-muebles" class="link-arrow">Ver galería ↓</a>
+  <section class="build-explainer">
+    <div class="wrap build-grid">
+      <figure class="build-diagram">
+        <img src="fotos/diagrama-mueble-construccion.jpg" alt="Diagrama de construcción de un mueble ESMA: estructura con soportes de acero, panel decorativo de MDF ranurado, iluminación LED, entrepaños ajustables, acabados premium en melamina/MDF/chapa, herrajes de alta calidad y diseño a medida">
+      </figure>
+      <div class="build-video">
+        <video autoplay muted loop playsinline poster="fotos/logo-esma-metal.png">
+          <source src="fotos/muebles-video.mp4" type="video/mp4">
+        </video>
       </div>
-    </div>
-    <div class="line-hero-media">
-      <div class="rotator">
-        <div class="rotator-slide active"><img src="fotos/tv-wall-unit.jpg" alt="Centro de entretenimiento a medida"></div>
-        <div class="rotator-slide"><img src="fotos/coffee-table.jpg" alt="Mesa de centro de madera"></div>
-        <div class="rotator-slide"><img src="fotos/khanda-cart.jpg" alt="Carrito de exhibición a medida"></div>
-        <div class="rotator-dots"><span class="active"></span><span></span><span></span></div>
-      </div>
-    </div>
     </div>
   </section>
 
@@ -952,28 +1006,40 @@
     </div>
   </section>
 
-</div>
-
-<div class="page" id="page-letreros" hidden>
   <section class="line-hero">
     <div class="wrap line-hero-grid">
     <div class="line-hero-content">
-      <p class="eyebrow">Letreros</p>
-      <h1 class="line-h1">Letreros e identidad de marca</h1>
-      <p class="lede">Letreros iluminados, acrílico espejo, neón y placas para consultorios, negocios y oficinas — diseño, fabricación e instalación.</p>
+      <p class="eyebrow">Muebles</p>
+      <h1 class="line-h1">Muebles a medida</h1>
+      <p class="lede">Mobiliario, closets y piezas diseñadas para tu espacio: de mesas y centros de entretenimiento a carritos y recepciones a medida.</p>
       <div class="hero-actions">
         <a href="#" data-anchor="contacto" class="btn btn-primary">Solicitar cotización →</a>
-        <a href="#line-gallery-letreros" class="link-arrow">Ver galería ↓</a>
+        <a href="#line-gallery-muebles" class="link-arrow">Ver galería ↓</a>
       </div>
     </div>
     <div class="line-hero-media">
       <div class="rotator">
-        <div class="rotator-slide active"><img src="fotos/vettanoia.jpg" alt="Letrero Vettanoia"></div>
-        <div class="rotator-slide"><img src="fotos/moai.jpg" alt="Letrero MOAI Dental"></div>
-        <div class="rotator-slide"><img src="fotos/prodonto.jpg" alt="Letrero Prodonto"></div>
+        <div class="rotator-slide active"><img src="fotos/tv-wall-unit.jpg" alt="Centro de entretenimiento a medida"></div>
+        <div class="rotator-slide"><img src="fotos/coffee-table.jpg" alt="Mesa de centro de madera"></div>
+        <div class="rotator-slide"><img src="fotos/khanda-cart.jpg" alt="Carrito de exhibición a medida"></div>
         <div class="rotator-dots"><span class="active"></span><span></span><span></span></div>
       </div>
     </div>
+    </div>
+  </section>
+</div>
+
+<div class="page" id="page-letreros" hidden>
+  <section class="build-explainer">
+    <div class="wrap build-grid">
+      <figure class="build-diagram">
+        <img src="fotos/diagrama-letrero-construccion.jpg" alt="Diagrama de construcción de un letrero iluminado ESMA: frente de aluminio con corte de precisión CNC/láser, iluminación LED de bajo consumo, estructura de aluminio, instalación sobre muro o fachada y acabado premium en aluminio anodizado">
+      </figure>
+      <div class="build-video">
+        <video autoplay muted loop playsinline poster="fotos/logo-esma-metal.png">
+          <source src="fotos/hero-video.mp4" type="video/mp4">
+        </video>
+      </div>
     </div>
   </section>
 
@@ -1110,28 +1176,40 @@
     </div>
   </section>
 
-</div>
-
-<div class="page" id="page-laser" hidden>
   <section class="line-hero">
     <div class="wrap line-hero-grid">
     <div class="line-hero-content">
-      <p class="eyebrow">Corte láser</p>
-      <h1 class="line-h1">Corte láser · Acrílico, MDF y metal</h1>
-      <p class="lede">Piezas y accesorios de corte láser y grabado: regalos personalizados, organizadores, letreros decorativos y piezas a la medida.</p>
+      <p class="eyebrow">Letreros</p>
+      <h1 class="line-h1">Letreros e identidad de marca</h1>
+      <p class="lede">Letreros iluminados, acrílico espejo, neón y placas para consultorios, negocios y oficinas — diseño, fabricación e instalación.</p>
       <div class="hero-actions">
         <a href="#" data-anchor="contacto" class="btn btn-primary">Solicitar cotización →</a>
-        <a href="#line-gallery-laser" class="link-arrow">Ver galería ↓</a>
+        <a href="#line-gallery-letreros" class="link-arrow">Ver galería ↓</a>
       </div>
     </div>
     <div class="line-hero-media">
       <div class="rotator">
-        <div class="rotator-slide active"><img src="fotos/wedding-box.jpg" alt="Caja de madera grabada con láser"></div>
-        <div class="rotator-slide"><img src="fotos/quote-sign.jpg" alt="Letrero decorativo de acrílico"></div>
-        <div class="rotator-slide"><img src="fotos/azteca-caddy.jpg" alt="Organizador de madera grabado"></div>
+        <div class="rotator-slide active"><img src="fotos/vettanoia.jpg" alt="Letrero Vettanoia"></div>
+        <div class="rotator-slide"><img src="fotos/moai.jpg" alt="Letrero MOAI Dental"></div>
+        <div class="rotator-slide"><img src="fotos/prodonto.jpg" alt="Letrero Prodonto"></div>
         <div class="rotator-dots"><span class="active"></span><span></span><span></span></div>
       </div>
     </div>
+    </div>
+  </section>
+</div>
+
+<div class="page" id="page-laser" hidden>
+  <section class="build-explainer">
+    <div class="wrap build-grid">
+      <figure class="build-diagram">
+        <img src="fotos/diagrama-laser-construccion.jpg" alt="Diagrama de instalación de un letrero de acrílico espejo ESMA: montaje sobre muro o fachada, adhesivo especial de alta resistencia, acrílico espejo de corte láser de 3mm, colocación sin tornillos y diseño personalizado a la medida">
+      </figure>
+      <div class="build-video">
+        <video autoplay muted loop playsinline poster="fotos/logo-esma-metal.png">
+          <source src="fotos/laser-video.mp4" type="video/mp4">
+        </video>
+      </div>
     </div>
   </section>
 
@@ -1182,6 +1260,27 @@
     </div>
   </section>
 
+  <section class="line-hero">
+    <div class="wrap line-hero-grid">
+    <div class="line-hero-content">
+      <p class="eyebrow">Corte láser</p>
+      <h1 class="line-h1">Corte láser · Acrílico, MDF y metal</h1>
+      <p class="lede">Piezas y accesorios de corte láser y grabado: regalos personalizados, organizadores, letreros decorativos y piezas a la medida.</p>
+      <div class="hero-actions">
+        <a href="#" data-anchor="contacto" class="btn btn-primary">Solicitar cotización →</a>
+        <a href="#line-gallery-laser" class="link-arrow">Ver galería ↓</a>
+      </div>
+    </div>
+    <div class="line-hero-media">
+      <div class="rotator">
+        <div class="rotator-slide active"><img src="fotos/wedding-box.jpg" alt="Caja de madera grabada con láser"></div>
+        <div class="rotator-slide"><img src="fotos/quote-sign.jpg" alt="Letrero decorativo de acrílico"></div>
+        <div class="rotator-slide"><img src="fotos/azteca-caddy.jpg" alt="Organizador de madera grabado"></div>
+        <div class="rotator-dots"><span class="active"></span><span></span><span></span></div>
+      </div>
+    </div>
+    </div>
+  </section>
 </div>
 
 </main>
@@ -1346,6 +1445,32 @@
       b.addEventListener('click', () => goToCat(b.dataset.cat));
     });
     render();
+  })();
+
+  (function initFeatured(){
+    const picker = document.getElementById('featuredPicker');
+    if(!picker) return;
+    const data = [
+      { img:'fotos/radioscan-night.jpg', title:'Un letrero que ilumina la fachada de RadioScan.', desc:'Diseñamos y fabricamos el letrero circular retroiluminado para RadioScan, Imagenología Dental — visible de día y de noche, resistente a la intemperie.' },
+      { img:'fotos/linea-italia.jpg', title:'Identidad de marca para Línea Italia.', desc:'Letrero corporativo retroiluminado para interior, con acabado a la medida del espacio de recepción.' },
+      { img:'fotos/tv-wall-unit.jpg', title:'Centro de entretenimiento a la medida.', desc:'Mueble de TV con panel decorativo, iluminación integrada y acabados premium, diseñado para el espacio del cliente.' },
+      { img:'fotos/wedding-box.jpg', title:'Piezas grabadas con corte láser.', desc:'Caja de madera grabada por láser — regalo personalizado con acabado fino y precisión de corte.' },
+      { img:'fotos/vettanoia.jpg', title:'Letrero en acrílico espejo para Vettanoia.', desc:'Letrero de fachada en acrílico espejo, diseñado para destacar la identidad de marca del negocio.' }
+    ];
+    const img = document.getElementById('featuredImg');
+    const title = document.getElementById('featuredTitle');
+    const desc = document.getElementById('featuredDesc');
+    const thumbs = Array.from(picker.querySelectorAll('.featured-thumb'));
+    thumbs.forEach((t, i) => {
+      t.addEventListener('click', () => {
+        thumbs.forEach(x => x.classList.remove('active'));
+        t.classList.add('active');
+        const d = data[i];
+        img.src = d.img;
+        title.textContent = d.title;
+        desc.textContent = d.desc;
+      });
+    });
   })();
 
   function applyFilter(f){
